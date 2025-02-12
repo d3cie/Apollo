@@ -54,7 +54,8 @@ async def conduct_research(query: ResearchQuery):
                         result = await crawler.arun(
                             url=source["link"],
                             extraction_strategy=LLMExtractionStrategy(
-                                provider="google",
+                                provider="gemini/gemini-1.5-pro",
+                                api_token=settings.GOOGLE_API_KEY,
                                 extraction_type="summary",
                                 instruction=f"""
                                 Extract only the most relevant information for: {question.text}

@@ -1,6 +1,7 @@
 from openai import AsyncOpenAI
 from typing import List
 from models.schemas import Question
+from datetime import date
 
 
 class QuestionGenerator:
@@ -13,10 +14,14 @@ class QuestionGenerator:
         prompt = f"""
         Generate {max_questions} essential research questions about: {topic}
         Focus on questions that:
-        1. Address fundamental aspects of the topic
-        2. Challenge common assumptions
-        3. Explore causal relationships
-        4. Investigate historical context
+       ou are an expert researcher. Today is ${date.today()}. Follow these instructions when responding:
+        - You may be asked to research subjects that is after your knowledge cutoff, assume the user is right when presented with news.
+        - The user is a highly experienced analyst, no need to simplify it, be as detailed as possible and make sure your response is correct.
+        - Be highly organized.
+        - Suggest solutions that I didn't think about.
+        - Be proactive and anticipate my needs.
+        - You may use high levels of speculation or prediction, just flag it for me.`;
+        -if its a casual topic adjust accordingly, for things such as current events and sports generate google search query like for most infomrtive best results and thegossip 
         """
 
         response = await self.client.chat.completions.create(
@@ -36,7 +41,7 @@ class QuestionGenerator:
 
         prompt = f"Generate 3 follow-up questions for: {question.text}"
         response = await self.client.chat.completions.create(
-            model="gpt-4-turbo-preview",
+            model="gpt-4o",
             messages=[{"role": "user", "content": prompt}],
             temperature=0.7,
         )

@@ -8,7 +8,7 @@ class ReportCompiler:
     def __init__(self, openai_key: str, google_api_key: str):
         self.openai_client = AsyncOpenAI(api_key=openai_key)
         genai.configure(api_key=google_api_key)
-        self.gemini_model = genai.GenerativeModel("gemini-pro")
+        self.gemini_model = genai.GenerativeModel("gemini-1.5-pro")
 
     async def compile_report(
         self, topic: str, questions: List[Question]
@@ -58,10 +58,15 @@ class ReportCompiler:
         {self._format_questions_and_findings(questions)}
         
         Provide a structured analysis covering:
-        1. Main themes and patterns
-        2. Conflicting information
-        3. Data gaps
-        4. Credibility of sources
+         - Treat me as an expert in all subject matter.
+        - Mistakes erode my trust, so be accurate and thorough.
+        - Provide detailed explanations, I'm comfortable with lots of detail.
+        - Value good arguments over authorities, the source is irrelevant.
+        - Consider new technologies and contrarian ideas, not just the conventional wisdom.
+        -look for Main themes and patterns
+        -Conflicting information
+        -Data gaps
+        -Credibility of sources
         """
 
     def _format_questions_and_findings(self, questions: List[Question]) -> str:

@@ -24,7 +24,6 @@ class SearchEngine:
                 "api_key": self.api_key,
                 "num": num_results,
                 "engine": "google",
-                "filter": 1,
                 "safe": "active",
             }
         )
