@@ -1,0 +1,10 @@
+fastapi>=0.115.8
+uvicorn>=0.34.0
+pydantic>=2.10.6
+pydantic-settings>=2.7.1
+python-dotenv>=1.0.1
+openai>=1.61.1
+google-generativeai>=0.8.4
+crawl4ai>=0.4.248
+serpapi>=0.1.5
+aiohttp>=3.11.12
