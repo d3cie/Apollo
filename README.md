@@ -33,7 +33,7 @@ Apollo is an advanced AI-powered research agent that conducts comprehensive, mul
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/apollo.git
+git clone https://github.com/manasseh-zw/apollo.git
 cd apollo
 ```
 
@@ -42,6 +42,8 @@ cd apollo
 ```bash
 pip install -r requirements.txt
 ```
+
+- you might need to run `crawl4ai-setup` and `crawl4ai-doctor` to make sure the crawler is setup and your environment has all the required stuff.
 
 3. Create a `.env` file in the root directory:
 
@@ -55,11 +57,13 @@ SERP_API_KEY=your_serp_api_key
 
 1. Start the FastAPI server:
 
+- cd into research_agent
+
 ```bash
-uvicorn main:app --reload
+uvicorn main:app --host 127.0.0.1 --port 3333
 ```
 
-2. The API will be available at `http://localhost:8000`
+2. The API will be available at `http://localhost:3333`
 
 ## 🔄 API Endpoints
 
@@ -143,8 +147,4 @@ research_report = response.json()
 3. **Report Compiler**: Compiles comprehensive reports using both models
 4. **Search Engine**: Performs targeted web searches for relevant content
 
-## 🔒 Security
-
-- API keys are managed through environment variables
-- Input validation using Pydantic models
-- Error handling for API requests
+# BE WARNED Your tokens will vanish faster than your weekend.

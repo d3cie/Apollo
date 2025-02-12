@@ -7,23 +7,32 @@ class ContentAnalyzer:
         self.model = genai.GenerativeModel('gemini-pro')
         
     async def analyze_content(self, content: str, question: str) -> Dict[str, Any]:
+        # Limit content length
+        content = content[:1000]  # Only analyze first 1000 chars
+        
         prompt = f"""
-        Analyze the following content in relation to this question: {question}
+        Analyze this content briefly for the question: {question}
+        Content: {content}
         
-        Content:
-        {content}
-        
-        Provide analysis in the following format:
+        Provide a BRIEF analysis with:
         1. Relevance (0-10)
-        2. Key findings
-        3. Supporting evidence
-        4. Potential biases or limitations
+        2. Key finding (1-2 sentences)
+        3. Main evidence (1 sentence)
+        
+        Keep the total response under 100 words.
         """
         
-        response = await self.model.generate_content_async(prompt)
-        
-        return {
-            "analysis": response.text,
-            "question": question,
-            "raw_content": content
-        } 
+        try:
+            response = await self.model.generate_content_async(prompt)
+            return {
+                "analysis": response.text,
+                "question": question,
+                "content_length": len(content)
+            }
+        except Exception as e:
+            print(f"Analysis error: {str(e)}")
+            return {
+                "analysis": "Analysis failed",
+                "question": question,
+                "error": str(e)
+            } 
