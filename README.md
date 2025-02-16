@@ -60,7 +60,7 @@ SERP_API_KEY=your_serp_api_key
 - cd into research_agent
 
 ```bash
-uvicorn main:app --host 127.0.0.1 --port 3333
+gunicorn main:app --host 127.0.0.1 --port 3333
 ```
 
 2. The API will be available at `http://localhost:3333`
